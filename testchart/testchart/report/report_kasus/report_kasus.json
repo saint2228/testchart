@@ -1,0 +1,23 @@
+{
+ "add_total_row": 0, 
+ "apply_user_permissions": 1, 
+ "creation": "2018-03-21 14:20:10.701795", 
+ "disabled": 0, 
+ "docstatus": 0, 
+ "doctype": "Report", 
+ "idx": 0, 
+ "is_standard": "Yes", 
+ "modified": "2018-03-21 14:20:10.701795", 
+ "modified_by": "Administrator", 
+ "module": "Testchart", 
+ "name": "Report Kasus", 
+ "owner": "Administrator", 
+ "ref_doctype": "KASUS1", 
+ "report_name": "Report Kasus", 
+ "report_type": "Script Report", 
+ "roles": [
+  {
+   "role": "System Manager"
+  }
+ ]
+}
