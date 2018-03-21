@@ -87,5 +87,9 @@ def get_chart_data(filters):
 			}
 		}
 		chart["type"] = "line"
+		chart["title"] = "Chart Kasus 1"
+		chart["colors"] = ['red']
+
+		#chart["height"] = 500
 
 	return chart
