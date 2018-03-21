@@ -1,7 +1,7 @@
 # Copyright (c) 2013, molie and contributors
 # For license information, please see license.txt
 
-#from __future__ import unicode_literals
+from __future__ import unicode_literals
 import frappe
 from frappe import _
 from frappe.utils import cint, flt
@@ -55,30 +55,37 @@ def get_conditions(filters):
 
 
 def get_chart_data(filters):
-	data_for_chart = frappe.db.sql("""select posting_date,count(nama) as count_data_status from `tabKASUS1` where docstatus <2 group by posting_date""",as_dict=1)
+	conditions = get_conditions(filters)
+	data_for_chart = frappe.db.sql(
+	 """select
+			posting_date,
+			count(qty) as count_data_status
+		from
+			`tabKASUS1`
+		where
+			docstatus <2
+			%s
+		group by
+			posting_date
+		""" % conditions,as_dict=True)
 
 	labels = []
 	values = []
-
 	for i in data_for_chart:
 		labels.append(i.posting_date)
-		values.append(i.count_of_status)
-
-
-	datasets= [
-				{
-					'label': "Some Data", 'type': 'bar',
-					'values': [25, 40, 30, 35, 8, 52, 17, -4]
-				},
-			  ]
-
-	chart = {
-		"data":{
-			'labels': labels,
-			'datasets': datasets
+		values.append(i.count_data_status)
+		datasets=[
+			{
+				'label': labels,
+				'values': values
+			}
+		]
+		chart={
+			"data":{
+				'labels':labels,
+				'datasets':datasets
+			}
 		}
-	}
-
-	chart["type"] = "bar"
+		chart["type"] = "line"
 
 	return chart
